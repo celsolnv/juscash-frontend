@@ -1,5 +1,4 @@
 import { FormProvider } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 import { usePage } from "./usePage";
 
@@ -44,21 +43,10 @@ export default function PasswordReset() {
                   name="confirmPassword"
                   autoComplete="new-password"
                   placeholder="*******"
-                  description="As senhas devem ser iguais"
                   hasGenerate={false}
                   hasInfo={false}
                 />
                 <FormButton type="submit">Salvar nova senha</FormButton>
-                {/* <div className="w-full">
-                  <div className="flex justify-center w-full">
-                    <Link
-                      to="/login"
-                      className="text-sm leading-5 underline cursor-pointer"
-                    >
-                      Voltar para o login
-                    </Link>
-                  </div>
-                </div> */}
                 <p className="text-muted-foreground text-sm font-normal leading-5 mt-2 text-center">
                   Ao redefinir sua senha, você será redirecionado para dentro do
                   sistema.

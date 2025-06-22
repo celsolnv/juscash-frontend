@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 import { toast } from "sonner";
 import { z } from "zod";
@@ -20,7 +19,6 @@ export const usePage = () => {
   const hookForm = useForm<TFormData>({
     resolver: zodResolver(schema)
   });
-  const navigate = useNavigate();
   const setIsLoading = useManagerForm.getState().setIsLoading;
   const isLoading = useManagerForm.getState().isLoading;
 

@@ -49,15 +49,17 @@ export const usePage = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...rest } = data;
     const formatter = {
-      ...rest,
-      email
+      email,
+      resetCode: code,
+      password: rest.password
     } as api.IResetParams;
     api
       .reset(formatter)
-      .then((data) => {
+      .then(() => {
         toast.success("Sua senha foi atualizada com sucesso!");
-        signIn(data);
-        // navigate("/login");
+        api.auth({ email, password: rest.password }).then((data) => {
+          signIn(data);
+        });
       })
       .finally(() => {
         setIsLoading(false);
