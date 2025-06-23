@@ -33,7 +33,10 @@ const Index = () => {
     setDateFrom,
     setDateTo,
     setSearchTerm,
-    filteredTasks
+    newPublications,
+    donePublications,
+    readPublications,
+    sentToLawyerPublications
   } = usePage();
   const { out } = useSignOut();
   return (
@@ -166,14 +169,34 @@ const Index = () => {
 
         {/* Kanban Board */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {columns.map((column) => (
+          <KanbanColumn
+            column={columns.new}
+            tasks={newPublications}
+            onMoveTask={moveTask}
+          />
+          <KanbanColumn
+            column={columns.read}
+            tasks={readPublications}
+            onMoveTask={moveTask}
+          />
+          <KanbanColumn
+            column={columns.sentToLawyer}
+            tasks={sentToLawyerPublications}
+            onMoveTask={moveTask}
+          />
+          <KanbanColumn
+            column={columns.new}
+            tasks={donePublications}
+            onMoveTask={moveTask}
+          />
+          {/* {columns.map((column) => (
             <KanbanColumn
               key={column.id}
               column={column}
               tasks={filteredTasks.filter((task) => task.status === column.id)}
               onMoveTask={moveTask}
             />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { TPublicationStatus } from "./IPublication";
+
 export interface IPaginationManager {
   totalItems?: number;
   currentPage?: number;
@@ -24,19 +26,10 @@ export interface Query {
   page?: number;
   limit?: number;
   query?: string;
-  roleId?: string | null;
-  isActive?: boolean | null;
   initial_date?: string;
   final_date?: string;
-  category?: string;
-  technicalSheetId?: string;
 
-  level?: number;
-  parentCategoryId?: string;
-  categoryId?: string;
-  startDate?: string;
-  periodType?: TPeriodType;
-  endDate?: string;
+  status?: TPublicationStatus;
 }
 
 export interface IManyAction {
