@@ -58,7 +58,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 
   return (
     <div
-      className={`${column.color} rounded-lg border-2 border-dashed p-4 min-h-[400px] transition-all duration-200 hover:shadow-md`}
+      className={`${column.color} rounded-lg border-2 border-dashed p-4 min-h-[70vh] min-w-[280px] transition-all duration-200 hover:shadow-md`}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >

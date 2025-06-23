@@ -13,7 +13,6 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { useSignOut } from "@/hooks/signout";
 import { cn } from "@/lib/utils";
 
 export interface ITask {
@@ -154,7 +153,7 @@ const Index = () => {
         </div>
 
         {/* Kanban Board */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex overflow-x-auto gap-6">
           <KanbanColumn
             column={columns.new}
             tasks={newPublications}
