@@ -4,6 +4,7 @@ import { Search, Calendar, Filter, Scale } from "lucide-react";
 
 import { Header } from "./__components/Header";
 import KanbanColumn from "./__components/KanbanColumn";
+import KanbanModal from "./__components/KanbanModal";
 import { columns } from "./constants";
 import { usePage } from "./usePage";
 
@@ -14,6 +15,7 @@ import {
   PopoverTrigger
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { IPublication } from "@/types/IPublication";
 
 export interface ITask {
   id: string;
@@ -22,6 +24,7 @@ export interface ITask {
   date: string;
   status: string;
   priority?: "high" | "medium" | "low";
+  publication?: IPublication;
 }
 const Index = () => {
   const {
@@ -36,7 +39,11 @@ const Index = () => {
     newPublications,
     donePublications,
     readPublications,
-    sentToLawyerPublications
+    sentToLawyerPublications,
+    selectedTask,
+    isModalOpen,
+    handleCardClick,
+    handleCloseModal
   } = usePage();
   return (
     <div className="min-h-screen bg-gray-50 w-full">
@@ -158,24 +165,33 @@ const Index = () => {
             column={columns.new}
             tasks={newPublications}
             onMoveTask={moveTask}
+            onCardClick={handleCardClick}
           />
           <KanbanColumn
             column={columns.read}
             tasks={readPublications}
             onMoveTask={moveTask}
+            onCardClick={handleCardClick}
           />
           <KanbanColumn
             column={columns.sentToLawyer}
             tasks={sentToLawyerPublications}
             onMoveTask={moveTask}
+            onCardClick={handleCardClick}
           />
           <KanbanColumn
             column={columns.done}
             tasks={donePublications}
             onMoveTask={moveTask}
+            onCardClick={handleCardClick}
           />
         </div>
       </div>
+      <KanbanModal
+        task={selectedTask}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };

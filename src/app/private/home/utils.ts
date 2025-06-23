@@ -31,7 +31,8 @@ export const convertPublicationsToTasks = (
       date: publication.created_at
         ? new Date(publication.created_at).toLocaleDateString()
         : "",
-      status: publicationStatusTranslate[publication.status]
+      status: publicationStatusTranslate[publication.status],
+      publication
     })) || []
   );
 };

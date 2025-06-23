@@ -16,6 +16,7 @@ export const usePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [dateFrom, setDateFrom] = useState<Date>();
   const [dateTo, setDateTo] = useState<Date>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [newPublications, setNewPublications] = useState<ITask[]>([]);
   const [readPublications, setReadPublications] = useState<ITask[]>([]);
@@ -24,6 +25,7 @@ export const usePage = () => {
   >([]);
   const [donePublications, setDonePublications] = useState<ITask[]>([]);
   const [count, setCount] = useState(0);
+  const [selectedTask, setSelectedTask] = useState<IPublication | null>(null);
 
   const moveTask = (
     taskId: string,
@@ -70,6 +72,20 @@ export const usePage = () => {
     });
   }, [count]);
 
+  const handleCardClick = (task: ITask) => {
+    if (!task.publication) {
+      toast.error("Tarefa sem publicação associada.");
+      return;
+    }
+    setSelectedTask(task.publication);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedTask(null);
+  };
+
   return {
     searchTerm,
     setSearchTerm,
@@ -82,6 +98,10 @@ export const usePage = () => {
     newPublications,
     readPublications,
     sentToLawyerPublications,
-    donePublications
+    donePublications,
+    isModalOpen,
+    selectedTask,
+    handleCloseModal,
+    handleCardClick
   };
 };

@@ -20,12 +20,14 @@ interface KanbanColumnProps {
     newStatus: TPublicationStatusPt,
     currentStatus: TPublicationStatusPt
   ) => void;
+  onCardClick: (task: ITask) => void;
 }
 
 const KanbanColumn: React.FC<KanbanColumnProps> = ({
   column,
   tasks,
-  onMoveTask
+  onMoveTask,
+  onCardClick
 }) => {
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -84,7 +86,9 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
             Nenhum resultado encontrado
           </div>
         ) : (
-          tasks.map((task) => <KanbanCard key={task.id} task={task} />)
+          tasks.map((task) => (
+            <KanbanCard key={task.id} task={task} onCardClick={onCardClick} />
+          ))
         )}
       </div>
     </div>

@@ -7,17 +7,22 @@ import { Card, CardContent } from "@/components/ui/card";
 
 interface KanbanCardProps {
   task: ITask;
+  onCardClick: (task: ITask) => void;
 }
 
-const KanbanCard: React.FC<KanbanCardProps> = ({ task }) => {
+const KanbanCard: React.FC<KanbanCardProps> = ({ task, onCardClick }) => {
   const handleDragStart = (e: React.DragEvent) => {
     e.dataTransfer.setData("text/plain", `${task.id}-${task.status}`);
+  };
+  const handleClick = () => {
+    onCardClick(task);
   };
 
   return (
     <Card
       draggable
       onDragStart={handleDragStart}
+      onClick={handleClick}
       className={`cursor-move transition-all duration-200 hover:shadow-lg hover:-translate-y-1 border-l-4 `}
     >
       <CardContent className="p-4">
