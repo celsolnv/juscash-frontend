@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Calendar } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 
 import { ITask } from "@/app/private/home";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +35,10 @@ const KanbanCard: React.FC<KanbanCardProps> = ({ task, onCardClick }) => {
 
         {/* Date and Priority */}
         <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-1 text-xs text-gray-500">
+            <Clock className="w-3 h-3" />
+            <span>{task.last_update || "Sem data"}</span>
+          </div>
           <div className="flex items-center space-x-1 text-xs text-gray-500">
             <Calendar className="w-3 h-3" />
             <span>{task.date || "Sem data"}</span>

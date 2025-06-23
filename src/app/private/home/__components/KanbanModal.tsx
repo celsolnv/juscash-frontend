@@ -1,5 +1,7 @@
 import React from "react";
 
+import moment from "moment";
+
 import {
   Dialog,
   DialogContent,
@@ -34,7 +36,7 @@ const KanbanModal: React.FC<KanbanModalProps> = ({ task, isOpen, onClose }) => {
               Data de publicação no DJE:
             </h3>
             <p className="text-gray-900">
-              {task.created_at || "Não informado"}
+              {moment(task.created_at).format("DD/MM/YYYY") || "Não informado"}
             </p>
           </div>
 

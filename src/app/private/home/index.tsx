@@ -22,6 +22,7 @@ export interface ITask {
   title: string;
   code: string;
   date: string;
+  last_update: string;
   status: string;
   priority?: "high" | "medium" | "low";
   publication?: IPublication;

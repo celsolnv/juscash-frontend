@@ -1,3 +1,6 @@
+import moment from "moment/min/moment-with-locales";
+moment.locale("pt-br");
+
 import { ITask } from ".";
 
 import {
@@ -24,16 +27,22 @@ export const convertPublicationsToTasks = (
   publications?: IPublication[]
 ): ITask[] => {
   return (
-    publications?.map((publication) => ({
-      id: String(publication.id),
-      title: publication.attorney || "Nenhum advogado encontrado",
-      code: publication.case_number || "Nenhum número de caso encontrado",
-      date: publication.created_at
-        ? new Date(publication.created_at).toLocaleDateString()
-        : "",
-      status: publicationStatusTranslate[publication.status],
-      publication
-    })) || []
+    publications?.map((publication) => {
+      const lastUpdate = publication.updated_at
+        ? moment(publication.updated_at).subtract(3, "hours").fromNow()
+        : "";
+      return {
+        id: String(publication.id),
+        title: publication.attorney || "Nenhum advogado encontrado",
+        code: publication.case_number || "Nenhum número de caso encontrado",
+        date:
+          moment(publication.created_at).format("DD/MM/YYYY") ||
+          "Não informado",
+        last_update: lastUpdate,
+        status: publicationStatusTranslate[publication.status],
+        publication
+      };
+    }) || []
   );
 };
 
