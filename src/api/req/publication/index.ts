@@ -1,20 +1,19 @@
 import { handleReq } from "@/api/handle";
+import { TPublicationStatus } from "@/types/IPublication";
+import { Query } from "@/types/Pagination";
 
-const url = "/users";
+const url = "/publications";
 
-export interface ICreate {
-  name?: string;
-  email?: string;
-  password?: string;
-}
+export type IUpdate = {
+  status?: TPublicationStatus;
+};
 
-export type IUpdate = ICreate;
-
-export const create = async (body: ICreate) =>
+export const list = async (query?: Query) =>
   handleReq({
-    method: "post",
+    method: "get",
     url,
-    body
+    query,
+    showSuccess: false
   });
 
 export const update = async (body: IUpdate, id: string) =>
@@ -23,7 +22,7 @@ export const update = async (body: IUpdate, id: string) =>
     url: `${url}/${id}`,
     body,
     showSuccess: true,
-    successMessage: "Usuário atualizado com sucesso"
+    successMessage: "Publicação atualizada com sucesso"
   });
 
 export const show = async (id: string) =>

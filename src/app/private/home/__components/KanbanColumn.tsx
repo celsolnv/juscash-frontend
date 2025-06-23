@@ -1,11 +1,9 @@
 import React from "react";
 
-import { Plus } from "lucide-react";
-
 import KanbanCard from "./KanbanCard";
 
 import { ITask } from "@/app/private/home";
-import { Button } from "@/components/ui/button";
+import { TPublicationStatusPt } from "@/types/IPublication";
 
 interface Column {
   id: string;
@@ -17,13 +15,19 @@ interface Column {
 interface KanbanColumnProps {
   column: Column;
   tasks: ITask[];
-  onMoveTask: (taskId: string, newStatus: string) => void;
+  onMoveTask: (
+    taskId: string,
+    newStatus: TPublicationStatusPt,
+    currentStatus: TPublicationStatusPt
+  ) => void;
+  onCardClick: (task: ITask) => void;
 }
 
 const KanbanColumn: React.FC<KanbanColumnProps> = ({
   column,
   tasks,
-  onMoveTask
+  onMoveTask,
+  onCardClick
 }) => {
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -31,8 +35,12 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    const taskId = e.dataTransfer.getData("text/plain");
-    onMoveTask(taskId, column.id);
+    const [id, status] = e.dataTransfer.getData("text/plain").split("-");
+    onMoveTask(
+      id,
+      column.id as TPublicationStatusPt,
+      status as TPublicationStatusPt
+    );
   };
 
   const getColumnIcon = (status: string) => {
@@ -52,7 +60,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 
   return (
     <div
-      className={`${column.color} rounded-lg border-2 border-dashed p-4 min-h-[400px] transition-all duration-200 hover:shadow-md`}
+      className={`${column.color} rounded-lg border-2 border-dashed p-4 h-[700px] overflow-y-auto min-w-[280px] transition-all duration-200 hover:shadow-md`}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
@@ -68,9 +76,6 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
           <span className="bg-white px-2 py-1 rounded-full text-xs font-medium text-gray-600">
             {tasks.length}
           </span>
-          <Button size="sm" variant="ghost" className="w-6 h-6 p-0">
-            <Plus className="w-3 h-3" />
-          </Button>
         </div>
       </div>
 
@@ -78,12 +83,12 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
       <div className="space-y-3">
         {tasks.length === 0 ? (
           <div className="text-center py-8 text-gray-500 text-sm">
-            {column.id === "advogado"
-              ? "Nenhum card encontrado"
-              : "Nenhuma tarefa"}
+            Nenhum resultado encontrado
           </div>
         ) : (
-          tasks.map((task) => <KanbanCard key={task.id} task={task} />)
+          tasks.map((task) => (
+            <KanbanCard key={task.id} task={task} onCardClick={onCardClick} />
+          ))
         )}
       </div>
     </div>
