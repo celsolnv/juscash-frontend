@@ -74,7 +74,7 @@ export default function LoginPage() {
 
               <div className="flex flex-col items-center gap-2 w-full mt-2">
                 <FormButton type="submit" className="h-10 px-4 py-2">
-                  Entrar
+                  Cadastrar
                 </FormButton>
               </div>
             </form>
