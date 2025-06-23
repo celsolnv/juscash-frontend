@@ -22,7 +22,7 @@ export const update = async (body: IUpdate, id: string) =>
     url: `${url}/${id}`,
     body,
     showSuccess: true,
-    successMessage: "Usuário atualizado com sucesso"
+    successMessage: "Publicação atualizada com sucesso"
   });
 
 export const show = async (id: string) =>

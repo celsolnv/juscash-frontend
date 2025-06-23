@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 
+import { toast } from "sonner";
+
 import { ITask } from ".";
-import { initialTasks } from "./constants";
-import { convertPublicationsToTasks } from "./utils";
+import {
+  checkValidMove,
+  convertPublicationsToTasks,
+  publicationStatusTranslateEn
+} from "./utils";
 
 import * as api from "@/api/req/publication";
-import { IPublication } from "@/types/IPublication";
+import { IPublication, TPublicationStatusPt } from "@/types/IPublication";
 
 export const usePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [dateFrom, setDateFrom] = useState<Date>();
   const [dateTo, setDateTo] = useState<Date>();
-  const [tasks, setTasks] = useState<ITask[]>(initialTasks);
 
   const [newPublications, setNewPublications] = useState<ITask[]>([]);
   const [readPublications, setReadPublications] = useState<ITask[]>([]);
@@ -20,12 +24,18 @@ export const usePage = () => {
   >([]);
   const [donePublications, setDonePublications] = useState<ITask[]>([]);
 
-  const moveTask = (taskId: string, newStatus: string) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, status: newStatus } : task
-      )
-    );
+  const moveTask = (
+    taskId: string,
+    newStatus: TPublicationStatusPt,
+    currentStatus: TPublicationStatusPt
+  ) => {
+    console.log("Movendo de :", currentStatus, "Para :", newStatus);
+    const hasValidMove = checkValidMove(currentStatus, newStatus);
+    if (!hasValidMove) {
+      toast.error("Movimentação inválida! Verifique o fluxo.");
+      return;
+    }
+    api.update({ status: publicationStatusTranslateEn[newStatus] }, taskId);
   };
 
   const clearDateFilters = () => {

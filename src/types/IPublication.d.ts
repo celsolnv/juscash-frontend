@@ -1,4 +1,5 @@
 export type TPublicationStatus = "new" | "read" | "sent_to_lawyer" | "done";
+export type TPublicationStatusPt = "nova" | "lida" | "advogado" | "concluído";
 
 export interface IPublication {
   id?: number;

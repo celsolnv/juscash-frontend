@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Search, Calendar, Filter, Scale } from "lucide-react";
 
+import { Header } from "./__components/Header";
 import KanbanColumn from "./__components/KanbanColumn";
 import { columns } from "./constants";
 import { usePage } from "./usePage";
@@ -38,24 +39,9 @@ const Index = () => {
     readPublications,
     sentToLawyerPublications
   } = usePage();
-  const { out } = useSignOut();
   return (
     <div className="min-h-screen bg-gray-50 w-full">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <img src="/logo.svg" alt="Rook Logo" className="h-5" />
-              </div>
-            </div>
-            <Button onClick={out} variant="outline" size="sm">
-              Sair
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
@@ -185,18 +171,10 @@ const Index = () => {
             onMoveTask={moveTask}
           />
           <KanbanColumn
-            column={columns.new}
+            column={columns.done}
             tasks={donePublications}
             onMoveTask={moveTask}
           />
-          {/* {columns.map((column) => (
-            <KanbanColumn
-              key={column.id}
-              column={column}
-              tasks={filteredTasks.filter((task) => task.status === column.id)}
-              onMoveTask={moveTask}
-            />
-          ))} */}
         </div>
       </div>
     </div>

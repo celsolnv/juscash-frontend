@@ -1,4 +1,4 @@
-import { ITask } from ".";
+import { TPublicationStatusPt } from "@/types/IPublication";
 
 export const columns = {
   new: {
@@ -20,60 +20,17 @@ export const columns = {
     count: 0
   },
   done: {
-    id: "concluido",
+    id: "concluído",
     title: "Concluído",
     color: "bg-green-100 border-green-200",
     count: 3
   }
-};
-
-export const initialTasks: ITask[] = [
+} as Record<
+  string,
   {
-    id: "1",
-    title: "Nova Publicação",
-    code: "5018120-21.2021.8.13.0022",
-    date: "21/10/2024",
-    status: "nova",
-    priority: "high"
-  },
-  {
-    id: "2",
-    title: "Publicação Lida",
-    code: "5018120-21.2021.8.13.0022",
-    date: "21/10/2024",
-    status: "lida",
-    priority: "medium"
-  },
-  {
-    id: "3",
-    title: "Envio Advogado",
-    code: "Nenhum card encontrado",
-    date: "",
-    status: "advogado",
-    priority: "low"
-  },
-  {
-    id: "4",
-    title: "Concluído",
-    code: "5018120-21.2021.8.13.0022",
-    date: "21/12/2023",
-    status: "concluido",
-    priority: "medium"
-  },
-  {
-    id: "5",
-    title: "Concluído",
-    code: "5018120-21.2021.8.13.0022",
-    date: "21/12/2023",
-    status: "concluido",
-    priority: "high"
-  },
-  {
-    id: "6",
-    title: "Concluído",
-    code: "5018120-21.2021.8.13.0022",
-    date: "21/12/2023",
-    status: "concluido",
-    priority: "low"
+    id: TPublicationStatusPt;
+    title: string;
+    color: string;
+    count: number;
   }
-];
+>;
