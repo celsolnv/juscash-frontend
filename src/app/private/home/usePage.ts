@@ -23,19 +23,23 @@ export const usePage = () => {
     ITask[]
   >([]);
   const [donePublications, setDonePublications] = useState<ITask[]>([]);
+  const [count, setCount] = useState(0);
 
   const moveTask = (
     taskId: string,
     newStatus: TPublicationStatusPt,
     currentStatus: TPublicationStatusPt
   ) => {
-    console.log("Movendo de :", currentStatus, "Para :", newStatus);
     const hasValidMove = checkValidMove(currentStatus, newStatus);
     if (!hasValidMove) {
       toast.error("Movimentação inválida! Verifique o fluxo.");
       return;
     }
-    api.update({ status: publicationStatusTranslateEn[newStatus] }, taskId);
+    api
+      .update({ status: publicationStatusTranslateEn[newStatus] }, taskId)
+      .then(() => {
+        setCount((prevCount) => prevCount + 1);
+      });
   };
 
   const clearDateFilters = () => {
@@ -64,7 +68,7 @@ export const usePage = () => {
       const formattedItems = convertPublicationsToTasks(items);
       setDonePublications(formattedItems);
     });
-  }, []);
+  }, [count]);
 
   return {
     searchTerm,
