@@ -26,8 +26,9 @@ export interface Query {
   page?: number;
   limit?: number;
   query?: string;
-  initial_date?: string;
-  final_date?: string;
+  search?: string;
+  startDate?: string;
+  endDate?: string;
 
   status?: TPublicationStatus;
 }

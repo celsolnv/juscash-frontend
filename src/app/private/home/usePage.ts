@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
+import moment from "moment";
 import { toast } from "sonner";
 
 import { ITask } from ".";
@@ -11,11 +12,13 @@ import {
 
 import * as api from "@/api/req/publication";
 import { IPublication, TPublicationStatusPt } from "@/types/IPublication";
+import { debounce } from "@/utils/func";
+import { sanitize } from "@/utils/text";
 
 export const usePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [dateFrom, setDateFrom] = useState<Date>();
-  const [dateTo, setDateTo] = useState<Date>();
+  const [dateFrom, setDateFrom] = useState<string>("");
+  const [dateTo, setDateTo] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [newPublications, setNewPublications] = useState<ITask[]>([]);
@@ -44,33 +47,52 @@ export const usePage = () => {
       });
   };
 
-  const clearDateFilters = () => {
-    setDateFrom(undefined);
-    setDateTo(undefined);
+  const handleSearch = useCallback(
+    debounce((param: string) => {
+      const query = sanitize(param);
+      setSearchTerm(query);
+    }, 300),
+    []
+  );
+  const handleSearchDate = () => {
+    if (dateFrom || dateTo) {
+      const from = dateFrom ? moment(dateFrom).toISOString() : undefined;
+      const to = dateTo ? moment(dateTo).toISOString() : undefined;
+      if (from && to && new Date(from) > new Date(to)) {
+        toast.error("A data de início não pode ser maior que a data de fim.");
+        return;
+      }
+    }
+    setCount((prevCount) => prevCount + 1);
   };
 
   useEffect(() => {
-    api.list({ status: "new" }).then((res) => {
+    const filters = {
+      search: searchTerm,
+      startDate: dateFrom,
+      endDate: dateTo
+    };
+    api.list({ ...filters, status: "new" }).then((res) => {
       const items = res.items as IPublication[];
       const formattedItems = convertPublicationsToTasks(items);
       setNewPublications(formattedItems);
     });
-    api.list({ status: "read" }).then((res) => {
+    api.list({ ...filters, status: "read" }).then((res) => {
       const items = res.items as IPublication[];
       const formattedItems = convertPublicationsToTasks(items);
       setReadPublications(formattedItems);
     });
-    api.list({ status: "sent_to_lawyer" }).then((res) => {
+    api.list({ ...filters, status: "sent_to_lawyer" }).then((res) => {
       const items = res.items as IPublication[];
       const formattedItems = convertPublicationsToTasks(items);
       setSentToLawyerPublications(formattedItems);
     });
-    api.list({ status: "done" }).then((res) => {
+    api.list({ ...filters, status: "done" }).then((res) => {
       const items = res.items as IPublication[];
       const formattedItems = convertPublicationsToTasks(items);
       setDonePublications(formattedItems);
     });
-  }, [count]);
+  }, [count, searchTerm]);
 
   const handleCardClick = (task: ITask) => {
     if (!task.publication) {
@@ -94,7 +116,6 @@ export const usePage = () => {
     dateTo,
     setDateTo,
     moveTask,
-    clearDateFilters,
     newPublications,
     readPublications,
     sentToLawyerPublications,
@@ -102,6 +123,8 @@ export const usePage = () => {
     isModalOpen,
     selectedTask,
     handleCloseModal,
-    handleCardClick
+    handleCardClick,
+    handleSearch,
+    handleSearchDate
   };
 };

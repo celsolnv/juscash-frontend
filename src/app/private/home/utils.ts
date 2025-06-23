@@ -36,7 +36,7 @@ export const convertPublicationsToTasks = (
         title: publication.attorney || "Nenhum advogado encontrado",
         code: publication.case_number || "Nenhum número de caso encontrado",
         date:
-          moment(publication.created_at).format("DD/MM/YYYY") ||
+          moment(publication.published_at).format("DD/MM/YYYY") ||
           "Não informado",
         last_update: lastUpdate,
         status: publicationStatusTranslate[publication.status],

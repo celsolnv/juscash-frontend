@@ -14,5 +14,5 @@ export interface IPublication {
   status: TPublicationStatus;
   created_at?: string;
   updated_at?: string;
-  // TODO: data que foi publicada
+  published_at?: string;
 }
