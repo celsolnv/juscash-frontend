@@ -1,69 +1,69 @@
-# Welcome to your Lovable project
+# Frontend - Painel de Publicações DJE-SP
 
-## Project info
+Painel Kanban para gerenciar publicações extraídas do DJE-SP (Diário da Justiça Eletrônico de São Paulo), com autenticação e cadastro de usuários.
 
-**URL**: https://lovable.dev/projects/54a11afc-391d-4669-a9ad-2c93bd52be07
+## 🛠 Tecnologias utilizadas
 
-## How can I edit this code?
+- React
+- TypeScript
+- Shadcn UI (Radix + Tailwind CSS)
+- React Hook Form
+- Zod
+- Axios
+- Vite
 
-There are several ways of editing your application.
+## 📦 Instalação
 
-**Use Lovable**
+1. Clone o repositório:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/54a11afc-391d-4669-a9ad-2c93bd52be07) and start prompting.
+   ```bash
+   git clone https://github.com/seu-usuario/frontend-dje-kanban.git
+   cd frontend-dje-kanban
+   ```
 
-Changes made via Lovable will be committed automatically to this repo.
+2. Instale as dependências:
 
-**Use your preferred IDE**
+   ```bash
+   npm install
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+3. Inicie o projeto:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+   ```bash
+   npm run dev
+   ```
 
-Follow these steps:
+## ⚙️ Variáveis de ambiente
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+As variáveis estão no arquivo `.env.example` na raiz do projeto:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+```env
+VITE_BASE_URL=
+VITE_API_URL=
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+VITE_NODE_ENV=
+VITE_PUBLIC_REDUX_KEY=
+VITE_PUBLIC_USER_LOCAL=
+VITE_PUBLIC_TOKEN_LOCAL=
 ```
 
-**Edit a file directly in GitHub**
+## 🧩 Funcionalidades
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- Login e autenticação via token JWT
+- Cadastro de novos usuários
+- Recuperação e redefinição de senha via e-mail
+- Visualização de publicações em painel Kanban
+- Atualização do status das publicações (drag & drop)
+- Integração com API REST do backend
 
-**Use GitHub Codespaces**
+## 🧭 Rotas disponíveis
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `/` — Página principal com painel de publicações
+- `/login` — Autenticação de usuário
+- `/cadastro` — Criação de novo usuário
+- `/esqueci-senha` — Envio de email de recuperação
+- `/redefinir-senha` — Redefinição de senha com código
 
-## What technologies are used for this project?
+---
 
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/54a11afc-391d-4669-a9ad-2c93bd52be07) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+> Este frontend consome a API backend desenvolvida com Node.js e gerencia os dados extraídos via scraping Python.
