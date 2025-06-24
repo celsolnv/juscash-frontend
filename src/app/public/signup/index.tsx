@@ -9,7 +9,7 @@ import { Card } from "@/components/ui";
 import { FormButton } from "@/components/ui/form-button";
 
 export default function LoginPage() {
-  const { hookForm, onSubmit, isLoading } = usePage();
+  const { hookForm, onSubmit } = usePage();
 
   return (
     <main className="flex min-h-screen w-full ">
@@ -35,25 +35,21 @@ export default function LoginPage() {
                   label="Seu nome completo"
                   placeholder="Insira seu nome"
                   name="name"
-                  disabled={isLoading}
                 />
                 <InputDefault
                   placeholder="Insira seu e-mail"
                   name="email"
                   type="email"
                   label="E-mail"
-                  disabled={isLoading}
                   autoComplete="username"
                 />
                 <InputPassword
-                  disabled={isLoading}
                   label="Senha"
                   autoComplete="current-password"
                   hasGenerate={false}
                   hasInfo
                 />
                 <InputPassword
-                  disabled={isLoading}
                   label="Confirme sua senha"
                   name="confirmPassword"
                   autoComplete="current-password"
