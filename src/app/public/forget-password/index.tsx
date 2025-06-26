@@ -15,7 +15,7 @@ export default function PasswordRecovery() {
       <section className="bg-muted flex min-w-60 flex-col items-center justify-center flex-1 p-4 md:p-12">
         <Card className="flex min-w-[190px] max-w-[480px] p-6 flex-col items-start gap-6 w-full">
           <div className="flex flex-col items-center gap-6">
-            <img src="/logo.svg" alt="Rook Logo" className="h-8" />
+            <img src="/logo.svg" alt="JusCash Logo" className="h-8" />
             <div className="flex flex-col items-center gap-2 w-full">
               <p className="text-muted-foreground text-sm text-center leading-5 mt-2">
                 Informe seu e-mail cadastrado para receber um link de

@@ -16,7 +16,7 @@ export default function LoginPage() {
       <section className="flex p-12 flex-col justify-center items-center gap-6 flex-1 bg-muted md:p-12 sm:px-6 sm:py-6">
         <Card className="flex min-w-[190px] max-w-[480px] p-6 flex-col items-start gap-6 w-full">
           <div className="flex flex-col items-center gap-6 w-full p-6">
-            <img src="/logo.svg" alt="Rook Logo" className="h-8" />
+            <img src="/logo.svg" alt="JusCash Logo" className="h-8" />
 
             <div className="flex flex-col items-center gap-2 w-full">
               <p className="text-muted-foreground text-sm leading-5">

@@ -10,7 +10,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <img src="/logo.svg" alt="Rook Logo" className="h-5" />
+              <img src="/logo.svg" alt="JusCash Logo" className="h-5" />
             </div>
           </div>
           <Button onClick={out} variant="outline" size="sm">

@@ -14,7 +14,7 @@ export default function PasswordReset() {
       <section className="bg-muted flex min-w-60 flex-col items-center justify-center flex-1 p-4 md:p-12 ">
         <Card className="flex min-w-[190px] max-w-[480px] p-6 flex-col items-start gap-6 w-full">
           <div className="flex flex-col items-center gap-6">
-            <img src="/logo.svg" alt="Rook Logo" className="h-8" />
+            <img src="/logo.svg" alt="JusCash Logo" className="h-8" />
             <div>
               <p className="text-muted-foreground text-sm font-normal leading-5 mt-2">
                 Defina uma nova senha segura para sua conta
